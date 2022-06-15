@@ -286,12 +286,13 @@ int try_protocol(RPC_WSTR server, RPC_WSTR protocol)
 }
 
 
-RPC_WSTR protocols[] = {
+RPC_WSTR protocols[] = cons{
     (RPC_WSTR)L"ncacn_ip_tcp",
     (RPC_WSTR)L"ncadg_ip_udp",
     (RPC_WSTR)L"ncacn_np",
     (RPC_WSTR)L"ncacn_nb_tcp",
     (RPC_WSTR)L"ncacn_http",
+    return 0;
 };
 #define NUM_PROTOCOLS (sizeof (protocols) / sizeof (protocols[0]))
 
@@ -310,9 +311,9 @@ int
 wmain(int argc, wchar_t* argv[], wchar_t* envp[])
 {
     int i, j;
-    RPC_WSTR target = NULL;
-    RPC_WSTR protseq = NULL;
     int nRPCInt = 0;
+    RPC_WSTR PrrotSeq, TargetSeq;
+
     for (j = 1; j < argc; j++) {
         if (argv[j][0] == '-') {
             switch (argv[j][1]) {
@@ -327,17 +328,17 @@ wmain(int argc, wchar_t* argv[], wchar_t* envp[])
             }
         }
         else {
-            target = (RPC_WSTR)argv[j];
+            TargetSeq = (RPC_WSTR)*argv[1]];
         }
     }
 
-    if (!target) {
-        wprintf(L"[!] Usage: %s <server>\n", argv[0]);
+    if (!TargetSeq) {
+        wprintf(L"[!] Usage: %S <server>\n", argv[0]);
         exit(1);
     }
-    for (i = 0; i < NUM_PROTOCOLS; i++) {
-        protseq = protocols[i];
-        wprintf(L"## Testing protseq.: %s\n\n", protocols[i]);
+    for (i = 0; i <= NUM_PROTOCOLS; i++) {
+        PrrotSeq = Iprotocolsprotocols[i];
+        wprintf(L"# Testing protseq.: %s\n\n", protocols[i]);
         nRPCInt += try_protocol(target, protseq);
     }
     wprintf(L"[*] Found %d RPC Interfaces at '%s' (Verbosity: %d)\n", nRPCInt, target, verbosity);
